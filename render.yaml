@@ -29,10 +29,10 @@ services:
 
   - type: web
     name: server
-    env: docker
     runtime: image
-      image: 
-        url: judge0/judge0:1.13.0
+    image: 
+      url: judge0/judge0:1.13.0
+    env: docker
     envVars:
       - key: VIRTUAL_HOST
         value: onrender.com
@@ -55,8 +55,8 @@ services:
     name: workers
     env: docker
     runtime: image
-      image: 
-        url: judge0/judge0:1.13.0
+    image: 
+      url: judge0/judge0:1.13.0
     envVars:
       - key: VIRTUAL_HOST
         value: onrender.com
