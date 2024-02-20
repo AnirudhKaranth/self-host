@@ -1,0 +1,81 @@
+databases:
+  - name: db
+    databaseName: judgedb_cl8y
+    user: judgedb_cl8y_user
+
+services:
+  - type: web
+    name: nginx
+    runtime: image
+    image: 
+      url: judge0/jwilder-nginx-proxy:latest-2020-10-30
+
+    env: docker
+    envVars:
+      - key: VIRTUAL_HOST
+        value: onrender.com
+      - key: LETSENCRYPT_HOST
+        value: onrender.com
+      - key: LETSENCRYPT_EMAIL
+        value: anikaranth47@gmail.com
+    envVars:
+      - key: <<default-logging.logging.driver>>
+        value: json-file
+      - key: <<default-logging.logging.options.max-size>>
+        value: 100m
+    startCommand: []
+    dependsOn:
+      - letsencrypt
+
+  - type: web
+    name: server
+    env: docker
+    runtime: image
+      image: judge0/judge0:1.13.0
+    envVars:
+      - key: VIRTUAL_HOST
+        value: onrender.com
+      - key: LETSENCRYPT_HOST
+        value: example.com
+      - key: onrender.com
+        value: anikaranth47@gmail.com
+    privileged: true
+    envVars:
+      - key: <<default-logging.logging.driver>>
+        value: json-file
+      - key: <<default-logging.logging.options.max-size>>
+        value: 100m
+    startCommand: []
+    dependsOn:
+      - db
+      - redis
+
+  - type: web
+    name: workers
+    env: docker
+    runtime: image
+      image: judge0/judge0:1.13.0
+    envVars:
+      - key: VIRTUAL_HOST
+        value: onrender.com
+      - key: LETSENCRYPT_HOST
+        value: onrender.com
+      - key: LETSENCRYPT_EMAIL
+        value: anikaranth47@gmail.com
+    privileged: true
+    envVars:
+      - key: <<default-logging.logging.driver>>
+        value: json-file
+      - key: <<default-logging.logging.options.max-size>>
+        value: 100m
+    startCommand: []
+    dependsOn:
+      - db
+      - redis
+
+  - type: redis
+    name: myredis
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
+
