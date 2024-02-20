@@ -1,4 +1,3 @@
-previewsEnabled: true
 databases:
   - name: db
     databaseName: judgedb_cl8y
