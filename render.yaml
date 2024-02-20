@@ -48,10 +48,6 @@ services:
         value: json-file
       - key: <<default-logging.logging.options.max-size>>
         value: 100m
-    startCommand: []
-    dependsOn:
-      - db
-      - redis
 
   - type: web
     name: workers
@@ -71,10 +67,6 @@ services:
         value: json-file
       - key: <<default-logging.logging.options.max-size>>
         value: 100m
-    startCommand: []
-    dependsOn:
-      - db
-      - redis
 
   - type: redis
     name: myredis
