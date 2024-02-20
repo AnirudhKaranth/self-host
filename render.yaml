@@ -2,6 +2,7 @@ databases:
   - name: db
     databaseName: judgedb_cl8y
     user: judgedb_cl8y_user
+    plan: free
 
 services:
   - type: web
@@ -76,4 +77,5 @@ services:
     ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
+    plan: free
 
