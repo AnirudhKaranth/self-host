@@ -18,7 +18,6 @@ services:
         value: onrender.com
       - key: LETSENCRYPT_EMAIL
         value: anikaranth47@gmail.com
-    envVars:
       - key: <<default-logging.logging.driver>>
         value: json-file
       - key: <<default-logging.logging.options.max-size>>
@@ -64,8 +63,7 @@ services:
         value: onrender.com
       - key: LETSENCRYPT_EMAIL
         value: anikaranth47@gmail.com
-    privileged: true
-    envVars:
+        privileged: true
       - key: <<default-logging.logging.driver>>
         value: json-file
       - key: <<default-logging.logging.options.max-size>>
