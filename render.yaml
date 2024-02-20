@@ -29,8 +29,6 @@ services:
         value: json-file
       - key: <<default-logging.logging.options.max-size>>
         value: 100m
-    dependsOn:
-      - letsencrypt
 
   - type: web
     name: server
