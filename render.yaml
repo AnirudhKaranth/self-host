@@ -27,6 +27,12 @@ services:
       - letsencrypt
 
   - type: web
+    name: letsencrypt
+    runtime: image
+    image:
+      url: judge0/jrcs-letsencrypt-nginx-proxy-companion:2.0
+
+  - type: web
     name: server
     runtime: image
     image: 
@@ -39,8 +45,7 @@ services:
         value: example.com
       - key: onrender.com
         value: anikaranth47@gmail.com
-    privileged: true
-    envVars:
+        privileged: true
       - key: <<default-logging.logging.driver>>
         value: json-file
       - key: <<default-logging.logging.options.max-size>>
