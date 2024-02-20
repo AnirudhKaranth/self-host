@@ -5,6 +5,13 @@ databases:
 
 services:
   - type: web
+    name: letsencrypt
+    runtime: image
+    image:
+      url: judge0/jrcs-letsencrypt-nginx-proxy-companion:2.0
+
+
+  - type: web
     name: nginx
     runtime: image
     image: 
@@ -22,15 +29,8 @@ services:
         value: json-file
       - key: <<default-logging.logging.options.max-size>>
         value: 100m
-    startCommand: []
     dependsOn:
       - letsencrypt
-
-  - type: web
-    name: letsencrypt
-    runtime: image
-    image:
-      url: judge0/jrcs-letsencrypt-nginx-proxy-companion:2.0
 
   - type: web
     name: server
